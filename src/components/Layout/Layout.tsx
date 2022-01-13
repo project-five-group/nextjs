@@ -22,6 +22,7 @@ export const Layout: FC = ({ children }) => {
       <StyledLayout>
         <StyledSideBar />
         <StyledContent>
+          <span>{user?.displayName}</span>
           <StyledHeader style={{ margin: 20, fontSize: 50, fontWeight: 100 }}>Frontend.fit</StyledHeader>
           <button onClick={() => authMutate()}>auth</button>
           {children}
