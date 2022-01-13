@@ -4,12 +4,15 @@ import type { AppProps } from 'next/app';
 import Head from 'next/head';
 import 'normalize.css';
 
-import { createQueryClient } from 'services';
+import { createQueryClient, useUserVerify } from 'services';
 import { ConfigProvider, Layout } from 'components';
+
+const VerifyUser = () => useUserVerify();
 
 const App = ({ Component, pageProps = {} }: AppProps) => {
   const [queryClient] = useState(createQueryClient);
-  const { dehydratedState } = pageProps;
+  const { dehydratedState, ...rest } = pageProps;
+  console.log(pageProps);
 
   return (
     <>
@@ -19,9 +22,10 @@ const App = ({ Component, pageProps = {} }: AppProps) => {
       </Head>
       <QueryClientProvider client={queryClient}>
         <Hydrate state={dehydratedState}>
+          <VerifyUser />
           <ConfigProvider>
             <Layout>
-              <Component {...pageProps} />
+              <Component {...rest} />
             </Layout>
           </ConfigProvider>
         </Hydrate>
