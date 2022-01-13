@@ -2,7 +2,7 @@ import { QueryFunctionContext, useQuery } from 'react-query';
 import { DocumentSnapshot, collection, query } from '@firebase/firestore';
 import { Union } from 'ts-toolbelt';
 
-import { db } from 'services/db';
+import { client } from 'services/client';
 
 import { createConstraints, getCollection } from '../../helpers';
 
@@ -13,7 +13,7 @@ export const getPostCollection = async ({ queryKey }: QueryFunctionContext) => {
 
   const constraints = createConstraints({ limit: 2, startAfter });
 
-  return await getCollection<{ author: string }[]>(query(collection(db, POST_QUERY_KEY), ...constraints));
+  return await getCollection<{ author: string }[]>(query(collection(client, POST_QUERY_KEY), ...constraints));
 };
 
 export const usePostQuery = (lastSnapshot: Union.Nullable<DocumentSnapshot>) => {

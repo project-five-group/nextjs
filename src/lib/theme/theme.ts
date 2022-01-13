@@ -1,9 +1,11 @@
 export const theme = {
   colors: {
-    black: '#000',
     white: '#FFF',
-    light: '#FCFCFC',
-    primary: '#FFE70C',
+    light: '#F1F1F1',
+    subLight: '#F9F9F9',
+    primary: '#B11217',
+    primaryDark: '#A00E19',
+    black: '#000',
   },
   media: {
     mobile: '768px',
