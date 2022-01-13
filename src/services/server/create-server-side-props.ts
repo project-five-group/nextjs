@@ -25,7 +25,7 @@ type TServerSideProps = {
 };
 
 const getUser = (token: string) =>
-  new Promise<Union.Nullable<Object.Partial<User>>>(async resolve => {
+  new Promise<Union.Nullable<Object.Partial<User>>>(resolve => {
     serverClient
       .auth()
       .verifyIdToken(token)
