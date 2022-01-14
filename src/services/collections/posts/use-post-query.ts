@@ -1,23 +1,26 @@
-import { QueryFunctionContext, useQuery } from 'react-query';
-import { DocumentSnapshot, collection, query } from '@firebase/firestore';
+import { useQuery } from 'react-query';
+import { collection, query } from '@firebase/firestore';
 import { Union } from 'ts-toolbelt';
 
 import { client } from 'services/client';
 
 import { createConstraints, getCollection } from '../../helpers';
 
-export const POST_QUERY_KEY = 'users';
+export const POST_QUERY_KEY = 'test';
 
-export const getPostCollection = async ({ queryKey }: QueryFunctionContext) => {
-  const [, { lastSnapshot: startAfter }] = queryKey as [string, { lastSnapshot: DocumentSnapshot }];
+type TResponse = Array<{
+  value: string;
+}>;
 
-  const constraints = createConstraints({ limit: 2, startAfter });
+export const getPostQueryKey = (startAfter: Union.Nullable<string> = null) => [POST_QUERY_KEY, { startAfter }];
 
-  return await getCollection<{ author: string }[]>(query(collection(client, POST_QUERY_KEY), ...constraints));
-};
+export const usePostQuery = (startAfter?: Union.Nullable<string>) => {
+  const { data, refetch, ...rest } = useQuery<TResponse>(getPostQueryKey(startAfter), async ({ queryKey }) => {
+    const [key, { startAfter }] = queryKey as [string, { startAfter: Union.Nullable<string> }];
+    const constraints = createConstraints({ limit: 2, startAfter, orderBy: 'value' });
 
-export const usePostQuery = (lastSnapshot: Union.Nullable<DocumentSnapshot>) => {
-  const { data, refetch, ...rest } = useQuery([POST_QUERY_KEY, { lastSnapshot }], getPostCollection);
+    return await getCollection<TResponse>(query(collection(client, key), ...constraints));
+  });
 
   return {
     posts: data ?? [],
