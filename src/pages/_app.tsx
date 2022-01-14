@@ -12,7 +12,6 @@ const VerifyUser = () => useUserVerify();
 const App = ({ Component, pageProps = {} }: AppProps) => {
   const [queryClient] = useState(createQueryClient);
   const { dehydratedState, ...rest } = pageProps;
-  console.log(pageProps);
 
   return (
     <>

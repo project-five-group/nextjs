@@ -13,4 +13,6 @@ if (!firebaseAdmin.apps.length) {
   });
 }
 
-export { firebaseAdmin as serverClient };
+const getServerClient = () => firebaseAdmin.apps[0] as firebaseAdmin.app.App;
+
+export { firebaseAdmin, getServerClient };

@@ -1,6 +1,6 @@
 import { FC } from 'react';
 
-import { useGoogleAuthMutation, useUserQuery } from 'services';
+import { useGoogleAuthMutation } from 'services';
 
 import {
   StyledContent,
@@ -14,7 +14,6 @@ import {
 
 export const Layout: FC = ({ children }) => {
   const { mutate: authMutate, data } = useGoogleAuthMutation();
-  const { user } = useUserQuery();
 
   return (
     <>
@@ -22,7 +21,6 @@ export const Layout: FC = ({ children }) => {
       <StyledLayout>
         <StyledSideBar />
         <StyledContent>
-          <span>{user?.displayName}</span>
           <StyledHeader style={{ margin: 20, fontSize: 50, fontWeight: 100 }}>Frontend.fit</StyledHeader>
           <button onClick={() => authMutate()}>auth</button>
           {children}

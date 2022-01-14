@@ -12,7 +12,7 @@ export const setCookie = (key: string, value: string, ctx?: Union.Nullable<GetSe
   nookies.set(ctx, key, value, COOKIE_OPTIONS);
 };
 
-export const getCookie = (key: string, ctx?: Union.Nullable<GetServerSidePropsContext>) => {
+export const getCookie = (key: string, ctx?: Union.Nullable<GetServerSidePropsContext>): Union.Nullable<string> => {
   const cookies = nookies.get(ctx);
 
   return cookies[key];

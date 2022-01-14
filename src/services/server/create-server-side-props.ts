@@ -8,7 +8,7 @@ import { AUTH_TOKEN } from '../constants';
 import { createQueryClient, getCookie } from '../helpers';
 import { USER_QUERY_KEY, parseUserFromServer } from '../auth';
 
-import { serverClient } from './client';
+import { firebaseAdmin } from './client';
 
 interface TSSRData extends Record<string, unknown> {
   redirect?: Redirect;
@@ -26,7 +26,7 @@ type TServerSideProps = {
 
 const getUser = (token: string) =>
   new Promise<Union.Nullable<Object.Partial<User>>>(resolve => {
-    serverClient
+    firebaseAdmin
       .auth()
       .verifyIdToken(token)
       .then(user => resolve(parseUserFromServer(user)))
@@ -38,7 +38,8 @@ export const createServerSideProps =
   async (ctx: GetServerSidePropsContext) => {
     const queryClient = createQueryClient();
 
-    const user = await getUser(getCookie(AUTH_TOKEN, ctx));
+    const token = getCookie(AUTH_TOKEN, ctx);
+    const user = token ? await getUser(token) : null;
     queryClient.setQueryData(USER_QUERY_KEY, user);
 
     const { notFound, redirect, ...nextProps } = (await resolveData?.(queryClient, ctx)) ?? {};
