@@ -7,7 +7,7 @@ import { StyledHomePage, StyledPosts } from './styled';
 
 export const HomePage = () => {
   const [currCursor, setCurrCursor] = useState<Union.Nullable<string>>();
-  const { posts } = usePostQuery(currCursor);
+  const { posts } = usePostQuery({ startAfter: currCursor });
 
   console.log(posts);
 
