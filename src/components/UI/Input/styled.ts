@@ -30,7 +30,7 @@ export const StyledInputContent = styled.div<{ isFocused?: boolean }>`
 export const StyledLabel = styled(Typography)<{ isFocused?: boolean }>`
   position: absolute;
   user-select: none;
-  transform: ${({ isFocused }) => `translate(${isFocused ? '-15px,-3px' : '0px, 6px'}) scale(${isFocused ? 0.75 : 1})`};
+  transform: ${({ isFocused }) => `translate(${isFocused ? '-15px,-3px' : '0px, 7px'}) scale(${isFocused ? 0.75 : 1})`};
   transition-property: color, transform;
   transition-duration: 0.3s;
   transition-timing-function: ease-out;

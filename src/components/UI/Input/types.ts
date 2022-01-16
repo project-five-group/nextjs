@@ -1,8 +1,12 @@
 import { InputHTMLAttributes } from 'react';
 
-export interface IInput extends Omit<InputHTMLAttributes<HTMLInputElement>, 'size'> {
+export interface IInput extends InputHTMLAttributes<HTMLInputElement> {
   /**
-   * Значение для инпута
+   * Значение которое передается в Input
    */
   value?: string | number;
+  /**
+   * Название для Input
+   */
+  label: string;
 }

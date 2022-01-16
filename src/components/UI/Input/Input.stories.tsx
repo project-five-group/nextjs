@@ -19,4 +19,4 @@ export const Default = (args: IInput) => {
   return <Input {...{ ...args, value, onChange }} />;
 };
 
-Default.argTypes = { placeholder: { defaultValue: 'Текстовый ввод' } };
+Default.argTypes = { label: { defaultValue: 'Текстовый ввод' }, placeholder: { defaultValue: 'Введите текст' } };

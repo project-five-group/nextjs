@@ -9,7 +9,15 @@ module.exports = {
       name: '@storybook/addon-docs',
       options: {
         configureJSX: true,
-        babelOptions: {},
+        babelOptions: {
+          babelOptions: {
+            plugins: [
+              ['@babel/plugin-proposal-private-property-in-object', {
+                loose: true
+              }],
+            ],
+          },
+        },
         sourceLoaderOptions: { parser: 'typescript' }
       },
     },
