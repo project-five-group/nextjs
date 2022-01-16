@@ -6,6 +6,9 @@ export const theme = {
     primary: '#B11217',
     primaryDark: '#A00E19',
     black: '#000',
+    link: '#6E88DE',
+    success: '#3A923C',
+    warning: '#D08210',
   },
   media: {
     mobile: '768px',

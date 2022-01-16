@@ -29,7 +29,9 @@ const getUser = (token: string) =>
     firebaseAdmin
       .auth()
       .verifyIdToken(token)
-      .then(user => resolve(parseUserFromServer(user)))
+      .then(user => {
+        resolve(parseUserFromServer(user));
+      })
       .catch(() => resolve(null));
   });
 

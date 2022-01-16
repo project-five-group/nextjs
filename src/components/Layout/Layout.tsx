@@ -1,6 +1,6 @@
 import { FC } from 'react';
 
-import { useGoogleAuthMutation } from 'services';
+import { useGithubAuthMutation, useGoogleAuthMutation, useUserLogoutMutation, useUserQuery } from 'services';
 
 import {
   StyledContent,
@@ -13,7 +13,12 @@ import {
 } from './styled';
 
 export const Layout: FC = ({ children }) => {
-  const { mutate: authMutate, data } = useGoogleAuthMutation();
+  const { user } = useUserQuery();
+  const { mutate: googleSignIn, data } = useGoogleAuthMutation();
+  const { mutate: githubSignIn } = useGithubAuthMutation();
+  const { mutate: handleLogout } = useUserLogoutMutation();
+
+  console.log(data);
 
   return (
     <>
@@ -22,7 +27,14 @@ export const Layout: FC = ({ children }) => {
         <StyledSideBar />
         <StyledContent>
           <StyledHeader style={{ margin: 20, fontSize: 50, fontWeight: 100 }}>Frontend.fit</StyledHeader>
-          <button onClick={() => authMutate()}>auth</button>
+          {!user ? (
+            <>
+              <button onClick={() => googleSignIn()}>auth google</button>
+              <button onClick={() => githubSignIn()}>auth github</button>
+            </>
+          ) : (
+            <button onClick={() => handleLogout()}>logout</button>
+          )}
           {children}
         </StyledContent>
         <StyledRightBar />

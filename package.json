@@ -6,7 +6,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "ngrok": "node scripts/ngrok.js"
+    "ngrok": "node scripts/ngrok.js",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
   },
   "dependencies": {
     "@juggle/resize-observer": "^3.3.1",
@@ -14,6 +16,7 @@
     "babel-plugin-styled-components": "^2.0.2",
     "firebase": "^9.6.2",
     "firebase-admin": "^10.0.1",
+    "formik": "^2.2.9",
     "next": "12.0.7",
     "nookies": "^2.5.2",
     "normalize.css": "^8.0.1",
@@ -26,11 +29,22 @@
     "ts-toolbelt": "^9.6.0"
   },
   "devDependencies": {
+    "@babel/core": "^7.16.7",
+    "@mdx-js/react": "^1.6.22",
+    "@storybook/addon-actions": "^6.4.13",
+    "@storybook/addon-controls": "^6.4.13",
+    "@storybook/addon-docs": "^6.4.13",
+    "@storybook/addon-essentials": "^6.4.13",
+    "@storybook/addon-links": "^6.4.13",
+    "@storybook/addon-storysource": "^6.4.13",
+    "@storybook/react": "^6.4.13",
+    "@storybook/theming": "^6.4.13",
     "@types/node": "17.0.2",
     "@types/ramda": "^0.27.61",
     "@types/react": "17.0.37",
     "@types/scroll-lock": "^2.1.0",
     "@types/styled-components": "^5.1.18",
+    "babel-loader": "^8.2.3",
     "eslint": "8.5.0",
     "eslint-config-next": "12.0.7",
     "eslint-config-prettier": "^8.3.0",
