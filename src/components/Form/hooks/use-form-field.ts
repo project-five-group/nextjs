@@ -1,16 +1,9 @@
 import { ChangeEvent, useCallback, useState } from 'react';
-import { FieldHelperProps, FieldInputProps, FieldMetaProps, FieldValidator, FormikHandlers, useField } from 'formik';
-import { O, Union } from 'ts-toolbelt';
+import { FieldHelperProps, FieldInputProps, FieldMetaProps, FormikHandlers, useField } from 'formik';
 
 import { useUpdateEffect } from 'lib';
 
-export type TFormValues = Record<string, unknown>;
-
-export interface IFormField<Form extends TFormValues = TFormValues, Value = any> {
-  validate?: FieldValidator;
-  name: O.Keys<Form>;
-  onAfterChange?: (value: Union.Nullable<Value | ChangeEvent>) => void;
-}
+import { IFormField, TFormValues } from '../types';
 
 export const useFormField = <Form extends TFormValues = TFormValues, Value = any>({
   onAfterChange,

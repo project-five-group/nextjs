@@ -1,6 +1,9 @@
 import { ReactElement, Ref, forwardRef } from 'react';
 
-import { Input, TFormValues, useFormField } from 'components';
+import { Input } from 'components';
+
+import { TFormValues } from '../../types';
+import { useFormField } from '../../hooks';
 
 import { IInputField } from './types';
 
@@ -13,7 +16,7 @@ const FormInput = forwardRef<HTMLInputElement, IInputField>(
     { validate, name, onAfterChange, ...rest }: IInputField<Form, Value>,
     ref: Ref<HTMLInputElement>
   ) => {
-    const [{ value, onChange, onBlur }] = useFormField({ validate, name, onAfterChange });
+    const [{ value = '', onChange, onBlur }] = useFormField({ validate, name, onAfterChange });
 
     return <Input {...{ ref, name, value, onChange, onBlur, ...rest }} />;
   }

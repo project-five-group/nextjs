@@ -4,7 +4,7 @@ export interface IInput extends InputHTMLAttributes<HTMLInputElement> {
   /**
    * Значение которое передается в Input
    */
-  value?: string | number;
+  value: string | number;
   /**
    * Название для Input
    */
