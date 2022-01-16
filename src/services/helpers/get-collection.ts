@@ -7,10 +7,14 @@ import { QueryFunctionContext } from 'react-query';
 import { client } from 'services/client';
 import { TConstraints } from 'services/types';
 
-export const getCollection = async <Data extends Record<string, any>[]>({
-  queryKey,
-}: QueryFunctionContext): Promise<Data> => {
-  const [key, params] = queryKey as [string, Object.Nullable<TConstraints>];
+type TResponse = Record<string, unknown>;
+
+type TQueryKey<Data extends TResponse> = [string, Object.Nullable<TConstraints<Data>>];
+
+export const getCollection = async <Data extends TResponse[] = TResponse[], Item extends TResponse = Data[number]>(
+  ctx: QueryFunctionContext | TQueryKey<Item>
+): Promise<Data> => {
+  const [key, params] = (Array.isArray(ctx) ? ctx : ctx.queryKey) as TQueryKey<Item>;
   const c = (params ?? {}) as TConstraints;
 
   const constraints = [

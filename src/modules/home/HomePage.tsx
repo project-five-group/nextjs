@@ -9,8 +9,6 @@ export const HomePage = () => {
   const [currCursor, setCurrCursor] = useState<Union.Nullable<string>>();
   const { posts } = usePostQuery({ startAfter: currCursor });
 
-  console.log(posts);
-
   return (
     <StyledHomePage>
       <StyledPosts>ok</StyledPosts>

@@ -3,3 +3,4 @@ export { combineClassNames } from './combine-class-names';
 export { hexToRgba } from './hex-to-rgba';
 export { isClient } from './is-client';
 export { clearNullable } from './clear-nullable';
+export * from './get-component-style';

@@ -19,4 +19,4 @@ export const client = getFirestore(app);
 
 export const auth = getAuth(app);
 
-isSupported().then(isSupport => isSupport && getAnalytics(app));
+if (process.env.NODE_ENV === 'production') isSupported().then(isSupport => isSupport && getAnalytics(app));

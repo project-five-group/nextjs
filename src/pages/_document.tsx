@@ -37,7 +37,6 @@ class CustomDocument extends Document {
           <meta name="description" content="Frontend" />
           <meta name="keywords" content="Frontend" />
           <link rel="icon" href="/favicon.svg" />
-          <link href="/fonts/style.css" rel="stylesheet" />
           <link rel="preconnect" href="https://fonts.googleapis.com" />
           <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
           <link
