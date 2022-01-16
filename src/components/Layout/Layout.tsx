@@ -1,6 +1,15 @@
 import { FC } from 'react';
 
-import { useGithubAuthMutation, useGoogleAuthMutation, useUserLogoutMutation, useUserQuery } from 'services';
+import {
+  useGithubAuthMutation,
+  useGoogleAuthMutation,
+  useUserLogoutMutation,
+  useUserQuery,
+  useUserSignInMutation,
+  useUserSignUpMutation,
+} from 'services';
+
+import { FormProvider, InputField, useForm } from '../Form';
 
 import {
   StyledContent,
@@ -18,8 +27,6 @@ export const Layout: FC = ({ children }) => {
   const { mutate: githubSignIn } = useGithubAuthMutation();
   const { mutate: handleLogout } = useUserLogoutMutation();
 
-  console.log(data);
-
   return (
     <>
       <StyledGlobal />
@@ -31,6 +38,7 @@ export const Layout: FC = ({ children }) => {
             <>
               <button onClick={() => googleSignIn()}>auth google</button>
               <button onClick={() => githubSignIn()}>auth github</button>
+              <TestLogin />
             </>
           ) : (
             <button onClick={() => handleLogout()}>logout</button>
@@ -40,5 +48,29 @@ export const Layout: FC = ({ children }) => {
         <StyledRightBar />
       </StyledLayout>
     </>
+  );
+};
+
+type TTestLogin = {
+  email: string;
+  password: string;
+};
+
+const TestLogin = () => {
+  const signIn = useUserSignInMutation();
+  const signUp = useUserSignUpMutation();
+
+  const methods = useForm<TTestLogin>({
+    onSubmit: values => signUp.mutateAsync(values),
+  });
+
+  return (
+    <div style={{ backgroundColor: 'white', margin: 50, padding: 20, maxWidth: 400 }}>
+      <FormProvider<TTestLogin> {...methods}>
+        <InputField name="email" label="Email" />
+        <InputField name="password" label="Пароль" />
+        <button type="submit">submit</button>
+      </FormProvider>
+    </div>
   );
 };
