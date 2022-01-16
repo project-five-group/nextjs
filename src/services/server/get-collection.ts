@@ -1,13 +1,13 @@
 import { firestore } from 'firebase-admin';
 import { uniq } from 'ramda';
-import { Object } from 'ts-toolbelt';
+import { O } from 'ts-toolbelt';
 import { QueryFunctionContext } from 'react-query';
 
 import { TConstraints } from '../types';
 
 import { getServerClient } from './client';
 
-const createQuery = (query: firestore.Query, constraints: Object.Nullable<TConstraints>) => {
+const createQuery = (query: firestore.Query, constraints: O.Nullable<TConstraints>) => {
   let collection = query;
 
   if (constraints)
@@ -22,7 +22,7 @@ const createQuery = (query: firestore.Query, constraints: Object.Nullable<TConst
 };
 
 export const getCollection = async ({ queryKey }: QueryFunctionContext) => {
-  const [key, params] = queryKey as [string, Object.Nullable<TConstraints>];
+  const [key, params] = queryKey as [string, O.Nullable<TConstraints>];
   const db = getServerClient().firestore();
   const collection = createQuery(db.collection(key), params);
   const data = await collection.get();
