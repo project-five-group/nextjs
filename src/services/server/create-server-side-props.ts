@@ -1,7 +1,7 @@
 import { GetServerSidePropsContext, Redirect } from 'next';
 import { QueryClient, dehydrate } from 'react-query';
 import { mergeDeepLeft } from 'ramda';
-import { Object, Union } from 'ts-toolbelt';
+import { O, Union } from 'ts-toolbelt';
 import { User } from '@firebase/auth';
 
 import { AUTH_TOKEN } from '../constants';
@@ -25,7 +25,7 @@ type TServerSideProps = {
 };
 
 const getUser = (token: string) =>
-  new Promise<Union.Nullable<Object.Partial<User>>>(resolve => {
+  new Promise<Union.Nullable<O.Partial<User>>>(resolve => {
     firebaseAdmin
       .auth()
       .verifyIdToken(token)

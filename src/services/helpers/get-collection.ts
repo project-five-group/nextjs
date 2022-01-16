@@ -1,6 +1,6 @@
 import { getDocs } from 'firebase/firestore';
 import { collection, query } from '@firebase/firestore';
-import { Object } from 'ts-toolbelt';
+import { O } from 'ts-toolbelt';
 import { QueryConstraint, limit, orderBy, startAfter } from '@firebase/firestore';
 import { QueryFunctionContext } from 'react-query';
 
@@ -9,7 +9,7 @@ import { TConstraints } from 'services/types';
 
 type TResponse = Record<string, unknown>;
 
-type TQueryKey<Data extends TResponse> = [string, Object.Nullable<TConstraints<Data>>];
+type TQueryKey<Data extends TResponse> = [string, O.Nullable<TConstraints<Data>>];
 
 export const getCollection = async <Data extends TResponse[] = TResponse[], Item extends TResponse = Data[number]>(
   ctx: QueryFunctionContext | TQueryKey<Item>
